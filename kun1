@@ -1,0 +1,7 @@
+mouse = game.Players.LocalPlayer:GetMouse()
+tool = Instance.new("Tool")
+tool.RequiresHandle = false
+tool.Name = "你干嘛哈哈哟"
+tool.Activated:connect(function()
+end)
+tool.Parent = game.Players.LocalPlayer.Backpack
