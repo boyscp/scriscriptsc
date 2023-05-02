@@ -1,0 +1,109 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({IntroText = "Rake Kill Test Gui",Name = "Rake Kill Test", HidePremium = false, SaveConfig = true, ConfigFolder = "RakeKillTestSex"})
+local StaminaTab = Window:MakeTab({
+	Name = "Stamina Character",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false,
+})
+local CF = CFrame.new
+local CharacterTab = Window:MakeTab({
+	Name = "Character",
+	Icon = "rbxassetid://10706317855",
+	PremiumOnly = false,
+})
+local Stamina
+StaminaTab:AddSlider({
+	Name = "Stamina",
+	Min = 1,
+	Max = 200,
+	Default = 100,
+	Flag = "StaminaToggle",
+	Save = true,
+	Callback = function(Value)
+		Stamina = Value
+	end    
+})
+game:GetService("RunService").RenderStepped:Connect(function()
+if Stamina then
+game.Players.LocalPlayer.Character.StaminaValues.Stamina.Value = Stamina
+end
+end)
+local Speed
+local EnableSpeed = false
+CharacterTab:AddToggle({
+	Name = "Enable Speed",
+	Default = false,
+	Flag = "SpeedToggle",
+	Save = false,
+	Callback = function(Value)
+		EnableSpeed = Value
+	end,
+})
+CharacterTab:AddSlider({
+	Name = "Speed",
+	Min = 0,
+	Max = 50,
+	Default = 12,
+	Color = Color3.fromRGB(0,150,255),
+	Increment = 1,
+	Callback = function(Value)
+		Speed = Value
+	end,
+})
+CharacterTab:AddParagraph("Warning","This Speed is sometimes get you kick of the game, also you gonna try it if its kick or not.")
+CharacterTab:AddParagraph("Safe","If its not kick, you're good!")
+game:GetService("RunService").RenderStepped:Connect(function()
+	if EnableSpeed then
+		if game.Players.LocalPlayer.Character.Humanoid.MoveDirection.Magnitude > 0 then
+			game.Players.LocalPlayer.Character:TranslateBy(game.Players.LocalPlayer.Character.Humanoid.MoveDirection * Speed/50)
+		end
+	end
+end)
+local GameTab = Window:MakeTab()
+GameTab:AddButton({
+	Name = "Insta Kill Rake",
+	Callback = function()
+		pcall(function()
+			local currentPos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+			game.Players.LocalPlayer.Character:PivotTo(CF(workspace.Rake.HumanoidRootPart.Position))
+			wait(0.1)
+			workspace.Rake.Humanoid.Health -= 999999
+			wait(0.15)
+			game.Players.LocalPlayer.Character:PivotTo(CF(currentPos))
+		end)
+	end    
+})
+GameTab:AddButton({
+	Name = "Damage Rake",
+	Callback = function()
+		pcall(function()
+			local args = {
+				[1] = workspace.Rake.Humanoid,
+				[2] = 99999999999,
+				[3] = workspace.Rake.AI.Stuns,
+				[4] = -100000,
+				[5] = "AAKKAKKAAKKA112121",
+				[6] = "ALALALAQAQAQ1+!'SA",
+				[7] = "TESTMQMQOQZP11A"
+			}
+			OrionLib:MakeNotification({
+				Name = "Rake Damaged",
+				Content = "Rake Damaged 3x times.",
+				Time = 5
+			})
+			for i = 1, 3 do
+				wait(0.01666666666662)
+				game:GetService("ReplicatedStorage").FlareRE.StunRE:FireServer(unpack(args))
+			end
+		end)
+	end,
+})
+local ParagraphTab = Window:MakeTab({
+	Name = "Paragraph",
+	Icon = "rbxassetid://0",
+	PremiumOnly = false
+})
+
+ParagraphTab:AddParagraph("Coming Soon","Gui Update is Coming Soon!")
+
+--// ok actual code starts here
